@@ -1,0 +1,28 @@
+/* 
+  Sharing_Library.strings
+  Sharing
+
+  Created by Zouhair Mahieddine on 15/10/11.
+  Copyright (c) 2011 Zedenem. All rights reserved.
+*/
+
+"Sharing_Library_ACTIONSHEET_TITLE" = "Partager cette information";
+
+"Sharing_Library_CANCEL" = "Annuler";
+"Sharing_Library_BY_MAIL" = "Par email";
+"Sharing_Library_BY_SMS" = "Par SMS";
+"Sharing_Library_BY_MMS" = "Par MMS";
+"Sharing_Library_BY_FACEBOOK" = "Sur Facebook";
+"Sharing_Library_BY_TWITTER" = "Sur Twitter";
+"Sharing_Library_BY_GOOGLE" = "Sur Google +";
+"Sharing_Library_PRINT" = "Imprimer";
+
+"Sharing_Library_NEW_TWEET" = "Nouveau Tweet";
+"Sharing_Library_SEND" = "Envoyer";
+"Sharing_Library_TWEET_SENDING" = "Envoi en cours...";
+"Sharing_Library_TWEET_SENDING_ERROR_OCCURRED" = "Une erreur est survenue";
+"Sharing_Library_TWEET_SENT" = "Tweet envoyé !";
+
+"Sharing_Library_OAuthTwitterController_PLEASE_WAIT" = "Veuillez patienter...";
+"Sharing_Library_OAuthTwitterController_TWITTER_INFO" = "Twitter";
+"Sharing_Library_OAuthTwitterController_SELECT_COPY_PIN" = "Copier le PIN";
