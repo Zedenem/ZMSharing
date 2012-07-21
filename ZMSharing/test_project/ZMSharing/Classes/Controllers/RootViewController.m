@@ -85,7 +85,8 @@
 
 #pragma mark Required to enable sharing by facebook
 - (NSString *)sharingManagerRequiresFacebookAppId:(SharingManager *)sharingManager {
-	return @"188092274603997";
+#warning Facebook App ID required
+	return @"";
 }
 - (void)sharingManager:(SharingManager *)sharingManager requiresInformationsToSendFacebookPost:(SharingManager_FacebookPostObject *)facebookPostObject {
 	facebookPostObject.name = @"I'm using the ZMSharing Library test app";
@@ -110,10 +111,12 @@
 
 #pragma mark Required to enable sharing by twitter on iOS < 5.0 devices
 - (NSString *)sharingManagerRequiresTwitterConsumerKey:(SharingManager *)sharingManager {
-	return @"yji8zn1ub16gs57xdUZKaA";
+#warning Twitter Consumer Key required
+	return @"";
 }
 - (NSString *)sharingManagerRequiresTwitterConsumerSecret:(SharingManager *)sharingManager {
-	return @"2JW4X4lG301KohbgJBKq3ffgTVrAXIdQX0buDhQ";
+#warning Twitter Consumer Secret required
+	return @"";
 }
 - (void)sharingManager:(SharingManager *)sharingManager needsToPresentTwitterLoginController:(SA_OAuthTwitterController *)twitterLoginController {
 	[self presentModalViewController:twitterLoginController animated:YES];
