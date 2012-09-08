@@ -10,12 +10,18 @@
 
 @implementation SharingManager_FacebookPostObject
 
-@synthesize name, caption, description, pictureURL, link;
-@synthesize actionLink, actionName;
+@synthesize name = _name;
+@synthesize caption = _caption;
+@synthesize description = _description;
+@synthesize pictureURL = _pictureURL;
+@synthesize link = _link;
 
 - (void)dealloc {
-	[name release]; [caption release]; [description release]; [pictureURL release]; [link release];
-	[actionLink release]; [actionName release];
+	[_name release];
+	[_caption release];
+	[_description release];
+	[_pictureURL release];
+	[_link release];
 	[super dealloc];
 }
 

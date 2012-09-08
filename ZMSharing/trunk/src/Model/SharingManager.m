@@ -14,10 +14,10 @@ static SharingManager *sharedInstance_ = nil;
 
 @synthesize enabledSharingTools;
 @synthesize delegate;
-@synthesize facebook;
+@synthesize facebookSession = _facebookSession;
 
 - (void)dealloc {
-	[facebook release];
+	[_facebookSession release];
 	[twitterEngine release];
 	[super dealloc];
 }
@@ -27,6 +27,9 @@ static SharingManager *sharedInstance_ = nil;
 	@synchronized(self) {
 		if (sharedInstance_ == nil) {
 			sharedInstance_ = [[self alloc] init];
+			
+			[[NSNotificationCenter defaultCenter] addObserver:sharedInstance_ selector:@selector(applicationWillTerminate) name:@"UIApplicationWillTerminateNotification" object:nil];
+			[[NSNotificationCenter defaultCenter] addObserver:sharedInstance_ selector:@selector(applicationDidBecomeActive) name:@"UIApplicationDidBecomeActiveNotification" object:nil];
 		}
     }
 	return(sharedInstance_);
@@ -141,7 +144,9 @@ static SharingManager *sharedInstance_ = nil;
 			);
 }
 - (BOOL)canShareByFacebook {
-	return (enabledSharingTools>>5 & 01);
+	return (enabledSharingTools>>5 & 01
+			&& [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"FacebookAppID"] length] > 0
+			);
 }
 - (BOOL)canShareByGoogle {
 	return (enabledSharingTools>>6 & 01
@@ -221,37 +226,26 @@ static SharingManager *sharedInstance_ = nil;
 }
 - (void)shareByFacebook {
 	if ([self canShareByFacebook]) {
-		if ([self.delegate respondsToSelector:@selector(sharingManagerRequiresFacebookAppId:)]) {
-			if (!facebook) {
-				facebook = [[Facebook alloc] initWithAppId:[self.delegate sharingManagerRequiresFacebookAppId:self] andDelegate:self];
-				if ([[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"] && [[NSUserDefaults standardUserDefaults] objectForKey:@"FBExpirationDateKey"]) {
-					facebook.accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"FBAccessTokenKey"];
-					facebook.expirationDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"FBExpirationDateKey"];
-				}
-			}
-			if (![facebook isSessionValid]) {
-				[facebook authorizeWithPermissions:nil fbAppAuth:YES safariAuth:YES];
-			}
-			else {
-				if ([self.delegate respondsToSelector:@selector(sharingManager:requiresInformationsToSendFacebookPost:)]) {
-					SharingManager_FacebookPostObject *facebookPostObject = [[SharingManager_FacebookPostObject alloc] init];
-					[self.delegate sharingManager:self requiresInformationsToSendFacebookPost:facebookPostObject];
-					
-					SBJSON *jsonWriter = [[SBJSON new] autorelease];
-					NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-												   facebookPostObject.name, @"name",
-												   facebookPostObject.caption, @"caption",
-												   facebookPostObject.description, @"description",
-												   facebookPostObject.link, @"link",
-												   facebookPostObject.pictureURL, @"picture",
-												   [jsonWriter stringWithObject:[NSArray arrayWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:facebookPostObject.actionName, @"name", facebookPostObject.actionLink, @"link", nil], nil]], @"actions",
-												   nil];
-					[facebookPostObject release];
-					[facebook dialog:@"feed" andParams:params andDelegate:self];
-				}
-				else {
-					[facebook dialog:@"feed" andDelegate:self];
-				}
+		if (!FBSession.activeSession.isOpen) {
+			[self openFacebookSessionAndShareAutomatically:YES];
+		}
+		else {
+			if ([self.delegate respondsToSelector:@selector(sharingManager:requiresInformationsToSendFacebookPost:)]) {
+				SharingManager_FacebookPostObject *facebookPostObject = [[SharingManager_FacebookPostObject alloc] init];
+				[self.delegate sharingManager:self requiresInformationsToSendFacebookPost:facebookPostObject];
+				
+				NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+											   facebookPostObject.name, @"name",
+											   facebookPostObject.caption, @"caption",
+											   facebookPostObject.description, @"description",
+											   facebookPostObject.link, @"link",
+											   facebookPostObject.pictureURL, @"picture", nil];
+				[FBRequestConnection startWithGraphPath:@"me/feed" parameters:params HTTPMethod:@"POST"
+									  completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+										  if ([self.delegate respondsToSelector:@selector(sharingManager:didFinishFacebookPostingWithError:)]) {
+											  [self.delegate sharingManager:self didFinishFacebookPostingWithError:error];
+										  }
+									  }];
 			}
 		}
 	}
@@ -335,7 +329,61 @@ static SharingManager *sharedInstance_ = nil;
 
 #pragma mark - Facebook sharing specific methods
 - (BOOL)handleOpenURL:(NSURL *)url {
-	return [facebook handleOpenURL:url];
+	if (FBSession.activeSession.state != FBSessionStateClosed) {
+		return [FBSession.activeSession handleOpenURL:url];
+	}
+	else {
+		return NO;
+	}
+}
+- (BOOL)openFacebookSession {
+	[self openFacebookSessionAndShareAutomatically:NO];
+}
+- (BOOL)openFacebookSessionAndShareAutomatically:(BOOL)shareAutomatically {
+    self.facebookSession = [[[FBSession alloc] init] autorelease];
+	[FBSession setActiveSession:self.facebookSession];
+	
+	NSArray *permissions = [NSArray arrayWithObjects:@"publish_actions", nil];
+    return [FBSession openActiveSessionWithPermissions:permissions allowLoginUI:YES
+									 completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
+                                         [self facebookSessionStateChanged:session state:state error:error shareAutomatically:shareAutomatically];
+                                     }];
+}
+- (BOOL)closeFacebookSession {
+	[FBSession.activeSession close];
+	return FBSession.activeSession.state == FBSessionStateClosed;
+}
+- (FBSessionState)facebookSessionState {
+	return FBSession.activeSession.state;
+}
+
+/*
+ * Callback for session changes.
+ */
+- (void)facebookSessionStateChanged:(FBSession *)session state:(FBSessionState)state error:(NSError *)error shareAutomatically:(BOOL)shareAutomatically {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:FBSessionStateChangedNotification object:session];
+    switch (state) {
+        case FBSessionStateOpen:
+            if (!error && shareAutomatically) {
+				[self shareByFacebook];
+            }
+            break;
+        case FBSessionStateClosed:
+        case FBSessionStateClosedLoginFailed:
+            [FBSession.activeSession closeAndClearTokenInformation];
+            break;
+        default:
+            break;
+    }
+}
+- (void)applicationWillTerminate {
+	[self closeFacebookSession];
+}
+- (void)applicationDidBecomeActive {
+	if (FBSession.activeSession.state == FBSessionStateCreatedOpening) {
+		[self closeFacebookSession];
+	}
 }
 
 #pragma mark - Print Controller display methods
@@ -364,34 +412,6 @@ static SharingManager *sharedInstance_ = nil;
 	if ([self.delegate respondsToSelector:@selector(sharingManager:messageComposeController:didFinishWithResult:)]) {
 		[self.delegate sharingManager:self messageComposeController:controller didFinishWithResult:result];
 	}
-}
-
-#pragma mark - Facebook
-#pragma mark FBSessionDelegate methods
-- (void)fbDidLogin {
-    [[NSUserDefaults standardUserDefaults] setObject:[facebook accessToken] forKey:@"FBAccessTokenKey"];
-    [[NSUserDefaults standardUserDefaults] setObject:[facebook expirationDate] forKey:@"FBExpirationDateKey"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-	[self shareByFacebook];
-}
-- (void)fbDidNotLogin:(BOOL)cancelled {
-	
-}
-#pragma mark FBDialogDelegate methods
-- (void)dialogDidComplete:(FBDialog *)dialog {
-	
-}
-- (void)dialogDidNotComplete:(FBDialog *)dialog {
-	
-}
-- (void)dialogCompleteWithUrl:(NSURL *)url {
-	
-}
-- (void)dialogDidNotCompleteWithUrl:(NSURL *)url {
-	
-}
-- (void)dialog:(FBDialog*)dialog didFailWithError:(NSError *)error {
-	
 }
 
 #pragma mark - Twitter+OAuth

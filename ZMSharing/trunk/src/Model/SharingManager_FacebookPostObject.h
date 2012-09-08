@@ -8,12 +8,10 @@
 
 #import "SharingManager_Object.h"
 
-@interface SharingManager_FacebookPostObject : SharingManager_Object {
-	NSString *name, *caption, *description, *pictureURL, *link;
-	NSString *actionLink, *actionName;
-}
+#import "SharingManager_Object.h"
+
+@interface SharingManager_FacebookPostObject : SharingManager_Object
 
 @property (nonatomic, copy) NSString *name, *caption, *description, *pictureURL, *link;
-@property (nonatomic, copy) NSString *actionLink, *actionName;
 
 @end

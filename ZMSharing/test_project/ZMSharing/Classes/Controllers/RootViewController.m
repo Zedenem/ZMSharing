@@ -8,6 +8,15 @@
 
 #import "RootViewController.h"
 
+@interface RootViewController ()
+
+#pragma mark Facebook Connect methods
+@property (retain, nonatomic) IBOutlet UIButton *connectToFacebookButton;
+- (IBAction)connectToFacebook;
+
+
+@end
+
 @implementation RootViewController
 
 - (void)didReceiveMemoryWarning { [super didReceiveMemoryWarning]; }
@@ -18,11 +27,18 @@
     [super viewDidLoad];
 	[[SharingManager sharedSharingManager] setDelegate:self];
 	[SharingManager sharedSharingManager].enabledSharingTools = SharingManagerMail | SharingManagerSMS | SharingManagerPrint | SharingManagerFacebook | SharingManagerTwitter;
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(facebookSessionStateChanged:) name:FBSessionStateChangedNotification object:nil];
 	NSLog(@"%@", [[SharingManager sharedSharingManager] description]);
 }
 
 - (void)viewDidUnload {
+	[self setConnectToFacebookButton:nil];
     [super viewDidUnload];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	[self setFacebookConnectButtonState:FBSession.activeSession.state];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -32,6 +48,38 @@
 #pragma mark Sharing methods
 - (IBAction)share:(id)sender {
 	[[SharingManager sharedSharingManager] showSharingActionSheetInView:self.view];
+}
+
+#pragma mark Facebook Connect methods
+@synthesize connectToFacebookButton = _connectToFacebookButton;
+- (IBAction)connectToFacebook {
+	[self.connectToFacebookButton setTitle:@"Connecting..." forState:UIControlStateNormal];
+	[self.connectToFacebookButton setEnabled:NO];
+	[[SharingManager sharedSharingManager] openFacebookSession];
+}
+- (IBAction)disconnectFromFacebook {
+	[self.connectToFacebookButton setTitle:@"Disconnecting..." forState:UIControlStateNormal];
+	[self.connectToFacebookButton setEnabled:NO];
+	[[SharingManager sharedSharingManager] closeFacebookSession];
+}
+- (void)facebookSessionStateChanged:(NSNotification *)notification {
+	FBSession *session = (FBSession *)[notification object];
+	[self setFacebookConnectButtonState:session.state];
+}
+- (void)setFacebookConnectButtonState:(FBSessionState)state {
+	switch (state) {
+        case FBSessionStateOpen:
+            [self.connectToFacebookButton setTitle:@"Disconnect from Facebook" forState:UIControlStateNormal];
+			[self.connectToFacebookButton removeTarget:self action:@selector(connectToFacebook) forControlEvents:UIControlEventTouchUpInside];
+            [self.connectToFacebookButton addTarget:self action:@selector(disconnectFromFacebook) forControlEvents:UIControlEventTouchUpInside];
+			break;
+        default:
+            [self.connectToFacebookButton setTitle:@"Connect to Facebook" forState:UIControlStateNormal];
+			[self.connectToFacebookButton removeTarget:self action:@selector(disconnectFromFacebook) forControlEvents:UIControlEventTouchUpInside];
+			[self.connectToFacebookButton addTarget:self action:@selector(connectToFacebook) forControlEvents:UIControlEventTouchUpInside];
+            break;
+    }
+	[self.connectToFacebookButton setEnabled:YES];
 }
 
 #pragma mark - SharingManagerDelegate methods
@@ -84,18 +132,23 @@
 }
 
 #pragma mark Required to enable sharing by facebook
-- (NSString *)sharingManagerRequiresFacebookAppId:(SharingManager *)sharingManager {
-#warning Facebook App ID required
-	return @"";
-}
 - (void)sharingManager:(SharingManager *)sharingManager requiresInformationsToSendFacebookPost:(SharingManager_FacebookPostObject *)facebookPostObject {
 	facebookPostObject.name = @"I'm using the ZMSharing Library test app";
 	facebookPostObject.caption = @"ZMSharing Library for iOS.";
 	facebookPostObject.description = @"This is a facebook post";
 	facebookPostObject.pictureURL = @"http://zedenem.com/wp-content/themes/Zedenem/images/logo.png";
-	facebookPostObject.link = @"http://www.mobile-health.fr/apps/sharinglibrary";
-	facebookPostObject.actionLink = @"https://github.com/Zedenem/ZMSharing";
-	facebookPostObject.actionName = @"See more on github!";
+	facebookPostObject.link = @"http://www.zedenem.com";
+}
+- (void)sharingManager:(SharingManager *)sharingManager didFinishFacebookPostingWithError:(NSError *)error {
+	NSString *message;
+	if (error) {
+		message = [NSString stringWithFormat:NSLocalizedString(@"FACEBOOK_ERROR_OCCURRED", nil), error.localizedDescription];
+	}
+	else {
+		message = [NSString stringWithFormat:NSLocalizedString(@"FACEBOOK_POST_SENT", nil)];
+	}
+	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"FACEBOOK", nil) message:message delegate:nil cancelButtonTitle:NSLocalizedString(@"CANCEL", nil) otherButtonTitles:nil];
+	[alertView show];
 }
 
 #pragma mark Required to enable sharing by twitter
@@ -125,9 +178,8 @@
 	[self presentModalViewController:tweetComposeController animated:YES];
 }
 
-
-
-
-
-
+- (void)dealloc {
+	[_connectToFacebookButton release];
+	[super dealloc];
+}
 @end

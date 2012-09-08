@@ -28,17 +28,6 @@
 		5F7B858B15BADDA700EE13EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7B857D15BADDA700EE13EE /* main.m */; };
 		5F7C4B0F146BCF31004B30AB /* SharingManager_TweetComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C4AA0146BCF31004B30AB /* SharingManager_TweetComposeViewController.m */; };
 		5F7C4B10146BCF31004B30AB /* SharingManager_TweetComposeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F7C4AA1146BCF31004B30AB /* SharingManager_TweetComposeViewController.xib */; };
-		5F7C4B11146BCF31004B30AB /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C4AA5146BCF31004B30AB /* Facebook.m */; };
-		5F7C4B12146BCF31004B30AB /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5F7C4AA7146BCF31004B30AB /* FBDialog.bundle */; };
-		5F7C4B13146BCF31004B30AB /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C4AA9146BCF31004B30AB /* FBDialog.m */; };
-		5F7C4B14146BCF31004B30AB /* FBLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C4AAB146BCF31004B30AB /* FBLoginDialog.m */; };
-		5F7C4B15146BCF31004B30AB /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C4AAD146BCF31004B30AB /* FBRequest.m */; };
-		5F7C4B16146BCF31004B30AB /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C4AB1146BCF31004B30AB /* NSObject+SBJSON.m */; };
-		5F7C4B17146BCF31004B30AB /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C4AB3146BCF31004B30AB /* NSString+SBJSON.m */; };
-		5F7C4B18146BCF31004B30AB /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C4AB5146BCF31004B30AB /* SBJSON.m */; };
-		5F7C4B19146BCF31004B30AB /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C4AB7146BCF31004B30AB /* SBJsonBase.m */; };
-		5F7C4B1A146BCF31004B30AB /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C4AB9146BCF31004B30AB /* SBJsonParser.m */; };
-		5F7C4B1B146BCF31004B30AB /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C4ABB146BCF31004B30AB /* SBJsonWriter.m */; };
 		5F7C4B1C146BCF31004B30AB /* SharingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C4ABE146BCF31004B30AB /* SharingManager.m */; };
 		5F7C4B1D146BCF31004B30AB /* SharingManager_FacebookPostObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C4AC0146BCF31004B30AB /* SharingManager_FacebookPostObject.m */; };
 		5F7C4B1E146BCF31004B30AB /* SharingManager_MailObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C4AC2146BCF31004B30AB /* SharingManager_MailObject.m */; };
@@ -67,6 +56,8 @@
 		5F7C4B36146BCF31004B30AB /* SA_OAuthTwitterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C4B09146BCF31004B30AB /* SA_OAuthTwitterController.m */; };
 		5F7C4B37146BCF31004B30AB /* SA_OAuthTwitterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7C4B0B146BCF31004B30AB /* SA_OAuthTwitterEngine.m */; };
 		5F7C4B38146BCF31004B30AB /* twitter_load.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F7C4B0C146BCF31004B30AB /* twitter_load.png */; };
+		5FE79F1A15FB7C2200E8C2E0 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE79F1915FB7C2200E8C2E0 /* FacebookSDK.framework */; };
+		5FE79F1D15FB7C3B00E8C2E0 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5FE79F1C15FB7C3B00E8C2E0 /* FacebookSDKResources.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,29 +93,6 @@
 		5F7C4A9F146BCF31004B30AB /* SharingManager_TweetComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharingManager_TweetComposeViewController.h; sourceTree = "<group>"; };
 		5F7C4AA0146BCF31004B30AB /* SharingManager_TweetComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharingManager_TweetComposeViewController.m; sourceTree = "<group>"; };
 		5F7C4AA1146BCF31004B30AB /* SharingManager_TweetComposeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SharingManager_TweetComposeViewController.xib; sourceTree = "<group>"; };
-		5F7C4AA4146BCF31004B30AB /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
-		5F7C4AA5146BCF31004B30AB /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Facebook.m; sourceTree = "<group>"; };
-		5F7C4AA6146BCF31004B30AB /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConnect.h; sourceTree = "<group>"; };
-		5F7C4AA7146BCF31004B30AB /* FBDialog.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBDialog.bundle; sourceTree = "<group>"; };
-		5F7C4AA8146BCF31004B30AB /* FBDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBDialog.h; sourceTree = "<group>"; };
-		5F7C4AA9146BCF31004B30AB /* FBDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBDialog.m; sourceTree = "<group>"; };
-		5F7C4AAA146BCF31004B30AB /* FBLoginDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginDialog.h; sourceTree = "<group>"; };
-		5F7C4AAB146BCF31004B30AB /* FBLoginDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginDialog.m; sourceTree = "<group>"; };
-		5F7C4AAC146BCF31004B30AB /* FBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRequest.h; sourceTree = "<group>"; };
-		5F7C4AAD146BCF31004B30AB /* FBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRequest.m; sourceTree = "<group>"; };
-		5F7C4AAF146BCF31004B30AB /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
-		5F7C4AB0146BCF31004B30AB /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
-		5F7C4AB1146BCF31004B30AB /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
-		5F7C4AB2146BCF31004B30AB /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
-		5F7C4AB3146BCF31004B30AB /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
-		5F7C4AB4146BCF31004B30AB /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
-		5F7C4AB5146BCF31004B30AB /* SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJSON.m; sourceTree = "<group>"; };
-		5F7C4AB6146BCF31004B30AB /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
-		5F7C4AB7146BCF31004B30AB /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
-		5F7C4AB8146BCF31004B30AB /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
-		5F7C4AB9146BCF31004B30AB /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
-		5F7C4ABA146BCF31004B30AB /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
-		5F7C4ABB146BCF31004B30AB /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		5F7C4ABD146BCF31004B30AB /* SharingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharingManager.h; sourceTree = "<group>"; };
 		5F7C4ABE146BCF31004B30AB /* SharingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharingManager.m; sourceTree = "<group>"; };
 		5F7C4ABF146BCF31004B30AB /* SharingManager_FacebookPostObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharingManager_FacebookPostObject.h; sourceTree = "<group>"; };
@@ -195,6 +163,8 @@
 		5F7C4B0A146BCF31004B30AB /* SA_OAuthTwitterEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SA_OAuthTwitterEngine.h; sourceTree = "<group>"; };
 		5F7C4B0B146BCF31004B30AB /* SA_OAuthTwitterEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SA_OAuthTwitterEngine.m; sourceTree = "<group>"; };
 		5F7C4B0C146BCF31004B30AB /* twitter_load.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_load.png; sourceTree = "<group>"; };
+		5FE79F1915FB7C2200E8C2E0 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		5FE79F1C15FB7C3B00E8C2E0 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../../../../../Documents/FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +179,7 @@
 				5F6BD151144592CD0031EA6E /* Foundation.framework in Frameworks */,
 				5F6BD153144592CD0031EA6E /* CoreGraphics.framework in Frameworks */,
 				5F7C4B27146BCF31004B30AB /* libOAuth.a in Frameworks */,
+				5FE79F1A15FB7C2200E8C2E0 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +207,8 @@
 		5F6BD14D144592CD0031EA6E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5FE79F1C15FB7C3B00E8C2E0 /* FacebookSDKResources.bundle */,
+				5FE79F1915FB7C2200E8C2E0 /* FacebookSDK.framework */,
 				5F343AD714501AEB003343E2 /* libxml2.dylib */,
 				5F193EB1144F1ECC002B2F35 /* Twitter.framework */,
 				5F68E80F1449B404000D5E1B /* MessageUI.framework */,
@@ -400,7 +373,6 @@
 			isa = PBXGroup;
 			children = (
 				5F7C4A9E146BCF31004B30AB /* Controllers */,
-				5F7C4AA3146BCF31004B30AB /* FBConnect */,
 				5F7C4ABC146BCF31004B30AB /* Model */,
 				5F7C4ACB146BCF31004B30AB /* Resources */,
 				5F7C4AD1146BCF31004B30AB /* Twitter+OAuth */,
@@ -416,44 +388,6 @@
 				5F7C4AA1146BCF31004B30AB /* SharingManager_TweetComposeViewController.xib */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		5F7C4AA3146BCF31004B30AB /* FBConnect */ = {
-			isa = PBXGroup;
-			children = (
-				5F7C4AA4146BCF31004B30AB /* Facebook.h */,
-				5F7C4AA5146BCF31004B30AB /* Facebook.m */,
-				5F7C4AA6146BCF31004B30AB /* FBConnect.h */,
-				5F7C4AA7146BCF31004B30AB /* FBDialog.bundle */,
-				5F7C4AA8146BCF31004B30AB /* FBDialog.h */,
-				5F7C4AA9146BCF31004B30AB /* FBDialog.m */,
-				5F7C4AAA146BCF31004B30AB /* FBLoginDialog.h */,
-				5F7C4AAB146BCF31004B30AB /* FBLoginDialog.m */,
-				5F7C4AAC146BCF31004B30AB /* FBRequest.h */,
-				5F7C4AAD146BCF31004B30AB /* FBRequest.m */,
-				5F7C4AAE146BCF31004B30AB /* JSON */,
-			);
-			path = FBConnect;
-			sourceTree = "<group>";
-		};
-		5F7C4AAE146BCF31004B30AB /* JSON */ = {
-			isa = PBXGroup;
-			children = (
-				5F7C4AAF146BCF31004B30AB /* JSON.h */,
-				5F7C4AB0146BCF31004B30AB /* NSObject+SBJSON.h */,
-				5F7C4AB1146BCF31004B30AB /* NSObject+SBJSON.m */,
-				5F7C4AB2146BCF31004B30AB /* NSString+SBJSON.h */,
-				5F7C4AB3146BCF31004B30AB /* NSString+SBJSON.m */,
-				5F7C4AB4146BCF31004B30AB /* SBJSON.h */,
-				5F7C4AB5146BCF31004B30AB /* SBJSON.m */,
-				5F7C4AB6146BCF31004B30AB /* SBJsonBase.h */,
-				5F7C4AB7146BCF31004B30AB /* SBJsonBase.m */,
-				5F7C4AB8146BCF31004B30AB /* SBJsonParser.h */,
-				5F7C4AB9146BCF31004B30AB /* SBJsonParser.m */,
-				5F7C4ABA146BCF31004B30AB /* SBJsonWriter.h */,
-				5F7C4ABB146BCF31004B30AB /* SBJsonWriter.m */,
-			);
-			path = JSON;
 			sourceTree = "<group>";
 		};
 		5F7C4ABC146BCF31004B30AB /* Model */ = {
@@ -664,7 +598,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F7C4B10146BCF31004B30AB /* SharingManager_TweetComposeViewController.xib in Resources */,
-				5F7C4B12146BCF31004B30AB /* FBDialog.bundle in Resources */,
 				5F7C4B23146BCF31004B30AB /* Sharing_Library_clouds.png in Resources */,
 				5F4ED48214D6BFCE00CE4BA4 /* Sharing_Library.strings in Resources */,
 				5F7C4B25146BCF31004B30AB /* jQueryInject.txt in Resources */,
@@ -675,6 +608,7 @@
 				5F7B858415BADDA700EE13EE /* MainWindow_iPad.xib in Resources */,
 				5F7B858615BADDA700EE13EE /* MainWindow_iPhone.xib in Resources */,
 				5F7B858915BADDA700EE13EE /* icon.png in Resources */,
+				5FE79F1D15FB7C3B00E8C2E0 /* FacebookSDKResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -686,16 +620,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F7C4B0F146BCF31004B30AB /* SharingManager_TweetComposeViewController.m in Sources */,
-				5F7C4B11146BCF31004B30AB /* Facebook.m in Sources */,
-				5F7C4B13146BCF31004B30AB /* FBDialog.m in Sources */,
-				5F7C4B14146BCF31004B30AB /* FBLoginDialog.m in Sources */,
-				5F7C4B15146BCF31004B30AB /* FBRequest.m in Sources */,
-				5F7C4B16146BCF31004B30AB /* NSObject+SBJSON.m in Sources */,
-				5F7C4B17146BCF31004B30AB /* NSString+SBJSON.m in Sources */,
-				5F7C4B18146BCF31004B30AB /* SBJSON.m in Sources */,
-				5F7C4B19146BCF31004B30AB /* SBJsonBase.m in Sources */,
-				5F7C4B1A146BCF31004B30AB /* SBJsonParser.m in Sources */,
-				5F7C4B1B146BCF31004B30AB /* SBJsonWriter.m in Sources */,
 				5F7C4B1C146BCF31004B30AB /* SharingManager.m in Sources */,
 				5F7C4B1D146BCF31004B30AB /* SharingManager_FacebookPostObject.m in Sources */,
 				5F7C4B1E146BCF31004B30AB /* SharingManager_MailObject.m in Sources */,
@@ -770,8 +694,9 @@
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../trunk/src/Twitter+OAuth/Libraries & Headers\"",
 				);
+				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FC2AA987-5D0E-4D92-B572-CF2D4EC75C4B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DC3D136D-B76B-48CF-835C-F3D95D90AA75";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -782,7 +707,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Zouhair Mahieddine";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/Supporting Files/$(PROJECT_NAME)-Prefix.pch";
@@ -797,8 +722,9 @@
 					"\"$(SRCROOT)/../trunk/src/Twitter+OAuth/Libraries & Headers\"",
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "209F95C9-C9EE-45B4-8A99-D2CE536F39CF";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -808,6 +734,10 @@
 		5F6BD171144592CD0031EA6E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../../Documents/FacebookSDK\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = ZMSharing;
@@ -818,6 +748,10 @@
 		5F6BD172144592CD0031EA6E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../../Documents/FacebookSDK\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = ZMSharing;

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <MessageUI/MessageUI.h>
 #import <Twitter/Twitter.h>
-#import "FBConnect.h"
+#import <FacebookSDK/FacebookSDK.h>
 #import "SA_OAuthTwitterController.h"
 #import "SA_OAuthTwitterEngine.h"
 
@@ -19,6 +19,9 @@
 #import "SharingManager_TweetObject.h"
 
 #import "SharingManager_TweetComposeViewController.h"
+
+/** Notifications */
+#define FBSessionStateChangedNotification @"com.example.Login:FBSessionStateChangedNotification"
 
 typedef enum NSUInteger {
 	SharingManagerNone		= 0,
@@ -33,12 +36,10 @@ typedef enum NSUInteger {
 
 @protocol SharingManagerDelegate;
 
-@interface SharingManager : NSObject <UIActionSheetDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, UIPrintInteractionControllerDelegate, FBSessionDelegate, FBDialogDelegate, MGTwitterEngineDelegate, SA_OAuthTwitterEngineDelegate, SA_OAuthTwitterControllerDelegate, SharingManager_TweetComposeViewControllerDelegate> {
+@interface SharingManager : NSObject <UIActionSheetDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, UIPrintInteractionControllerDelegate, MGTwitterEngineDelegate, SA_OAuthTwitterEngineDelegate, SA_OAuthTwitterControllerDelegate, SharingManager_TweetComposeViewControllerDelegate> {
 	id<SharingManagerDelegate> delegate;
 	
 	SharingManagerSharingTools enabledSharingTools:7;
-	
-	Facebook *facebook;
 	
 	SA_OAuthTwitterEngine *twitterEngine;
 	SharingManager_TweetComposeViewController *sharingManager_TweetComposeViewController;
@@ -47,7 +48,7 @@ typedef enum NSUInteger {
 @property (nonatomic, assign) id<SharingManagerDelegate> delegate;
 @property SharingManagerSharingTools enabledSharingTools;
 
-@property (nonatomic, retain) Facebook *facebook;
+@property (retain, nonatomic) FBSession *facebookSession;
 
 #pragma mark - Singleton access methods
 + (SharingManager *)sharedSharingManager;
@@ -85,6 +86,9 @@ typedef enum NSUInteger {
 
 #pragma mark - Facebook sharing specific methods
 - (BOOL)handleOpenURL:(NSURL *)url;
+- (BOOL)openFacebookSession;
+- (BOOL)closeFacebookSession;
+- (FBSessionState)facebookSessionState;
 
 #pragma mark - Print Controller display methods
 - (void)showPrintControllerAnimated:(BOOL)animated completionHandler:(UIPrintInteractionCompletionHandler)completion;
@@ -114,8 +118,8 @@ typedef enum NSUInteger {
 - (void)sharingManagerNeedsToPresentPrintController:(SharingManager *)sharingManager;
 
 // Required to enable sharing by facebook
-- (NSString *)sharingManagerRequiresFacebookAppId:(SharingManager *)sharingManager;
 - (void)sharingManager:(SharingManager *)sharingManager requiresInformationsToSendFacebookPost:(SharingManager_FacebookPostObject *)facebookPostObject;
+- (void)sharingManager:(SharingManager *)sharingManager didFinishFacebookPostingWithError:(NSError *)error;
 
 // Required to enable sharing by twitter
 - (void)sharingManager:(SharingManager *)sharingManager requiresInformationsToSendTweet:(SharingManager_TweetObject *)tweetObject;
